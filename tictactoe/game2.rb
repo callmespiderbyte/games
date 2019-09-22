@@ -5,15 +5,18 @@
 # when there's a row of 3 of either, tell me i win
 # if all 9 spaces are filled, with no rows, tell me i lose
 
-row1 = ("123")
-row2 = ("456")
-row3 = ("789")
+rows = [
+  "123",
+  "456",
+  "789"
+]
 
-grid = row1 row2 row3
-
-grid_row1 = "_" * row1.length
-grid_row2 = "_" * row2.length
-grid_row3 = "_" * row3.length
+# the board is always 3x3, so we can just hard-code it (rather than calculating it from rows)
+grid_rows = [
+  "___",
+  "___",
+  "___"
+]
 
 turn = 9
 
@@ -25,36 +28,31 @@ puts
 
 while turn > 0
   puts
-  puts grid
+  grid_rows.each do |row|
+    puts row
+  end
   puts
 
-  input = $stdin.gets[0]
+  input = $stdin.gets[0].to_i
+
+  # now that we have input from 1..9,
+  # calculate which row and column 
+  row_number = (input-1) / 3
+  column_number = (input-1) % 3
+
+  player = turn.even? ? tictac : toe
+
+  grid_rows[row_number][column_number] = player
+
   turn = turn-1
-
-
-    row1.split("").each.with_index do |character, index|
-      if character == input
-        grid_row1[index] = turn.odd? ? toe : tictac
-      end
-
-      end
-    row2.split("").each.with_index do |character, index|
-        grid_row2[index] = tictac if character == input && turn.even?
-        grid_row2[index] = toe if character == input && turn.odd?
-      end
-    row3.split("").each.with_index do |character, index|
-        grid_row3[index] = tictac if character == input && turn.even?
-        grid_row3[index] = toe if character == input && turn.odd?
-      end
-
 end
 
     puts "__________"
     puts "Game over!"
     puts "__________"
-    puts grid_row1
-    puts grid_row2
-    puts grid_row3
+    grid_rows.each do |row|
+      puts row
+    end
 
 
 
