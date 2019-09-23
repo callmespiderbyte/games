@@ -5,6 +5,17 @@ words = ["interpolation","causal","ammunition","sanddune","blimp","ramen","welli
 word = words.sample
 guessed_word = "_" * word.length
 
+require 'rainbow'
+
+  puts
+  puts Rainbow("Welcome to HangMan! What's your name?").yellow
+  puts
+  name = gets.chomp
+  puts
+  puts Rainbow("Hey there, #{name}! :)").yellow
+  puts Rainbow("Ready to play? Here's your word...").yellow
+  puts
+
 while lives > 0 && guessed_word.include?("_")
 
   puts guessed_word
@@ -16,24 +27,31 @@ while lives > 0 && guessed_word.include?("_")
     end
 
   if word.include?(input)
-      puts "yes"
+      puts Rainbow("Correct!").green.bold
 
   else
     lives = lives-1
     life_word = lives == 1 ? "life" : "lives"
-    puts "weh - you've got #{lives} #{life_word} left!"
+    puts Rainbow("Ru oh... you've got #{lives} #{life_word} left!").red.bold
   end
 
 end
 
   if !guessed_word.include?("_")
-    puts "hazaar!"
-    puts guessed_word
+    puts
+    puts Rainbow("★______________★").green
+    puts Rainbow("....YOU WIN!....").green.bold
+    print "-> "
+    puts Rainbow(guessed_word).orange
+    puts Rainbow("★______________★").green
+
 
   else
-    puts "womp womp womp...☠︎"
+    puts
+    puts Rainbow("☠︎_______________☠︎").red
+    puts Rainbow("....GAME OVER....").red.bold
+    print "The word was "
+    puts Rainbow(word).blue
+    puts Rainbow("☠︎_______________☠︎").red
   end
-
-
-puts
 puts
