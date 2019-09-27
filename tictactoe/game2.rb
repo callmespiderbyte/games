@@ -86,12 +86,16 @@ while !board_full && !win
 end
 
   if win
-    puts "HOLY SHIT"
+    puts
+    puts Rainbow("HOLY SHIT YOU WON").green.bold
+    puts
   else
 
+  puts
   puts Rainbow("☠︎_______________☠︎").red
   puts Rainbow("....GAME OVER....").red.bold
   puts Rainbow("☠︎_______________☠︎").red
+  puts
 end
 
   grid_rows.each do |row|
