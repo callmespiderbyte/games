@@ -46,10 +46,8 @@ wrong_guesses = 20
 # Too may guesses?
 
 hit_outputs = ["Nice! Keep going :D", "Boom! You got one! :D", "BUUUUURN!", "That ship walked the plank! :D", "Kablooey! Another one sent to Davey Jones' locker! ARRRR!"]
-hit_output = hit_outputs.sample
 
 miss_outputs = ["Splash! Missed, try again!", "Nope, that's just water! Where are the ships?!", "Oh dear, nothing but H20 here :/", "Ru oh, liquid failure my friend. Try again!", "Nu-uh, only water. Try aim for a ship next time!"]
-miss_output = miss_outputs.sample
 # How to make these change every time? Currently they're picking one and it's staying the same for the whole game...
 
 
@@ -65,7 +63,7 @@ puts "1) The aim of the game is to sink all the ships. There are:"
 puts "- 2 Battleships (B)"
 puts "- 3 Submarines (S)"
 puts "- 4 Cruisers (C)"
-puts "2) Use columns and grids to aim and fire!"
+puts "2) Use columns and grids to aim and fire! Numbers go from 1 to 8."
 puts "- So, inputting '23' will hit column 2, and row 3."
 puts "3) You only get 20 misses, so make sure to avoid the open water as best as you can!"
 puts
@@ -100,12 +98,12 @@ puts Rainbow("Ready? GOOD LUCK! :D").green.bold
 
   if guess == "~"
       puts
-      puts Rainbow(miss_output).blue.bold
+      puts Rainbow(miss_outputs.sample).blue.bold
       wrong_guesses = wrong_guesses-1
       puts
     else
       puts
-      puts Rainbow(hit_output).green.bold
+      puts Rainbow(hit_outputs.sample).green.bold
       puts
   end
 
@@ -139,22 +137,28 @@ puts Rainbow("Ready? GOOD LUCK! :D").green.bold
     #   end
     # end
 
-count = boards.each do |row|
-          battleships = row.split("").count "B"
-          submarines = row.split("").count "S"
-          cruisers = row.split("").count "C"
-          # HOW TO SUM THESE?
-        end
+count = 0
 
-  if count == 25
-    win = true
-  else win = false
-  end
+  boards.each do |row|
+
+    bees = row.split("").count "B"
+    sees = row.split("").count "C"
+    esses = row.split("").count "S"
+    hits = bees + sees + esses
+
+    count += hits
+    # x = x + y
+    end
+
+win = (count == 25)
 
 end
 
 
 if win
+  puts Rainbow("★______________★").green
+  puts Rainbow("....YOU WIN!....").green.bold
+  puts Rainbow("★______________★").green
 
   else
     puts
