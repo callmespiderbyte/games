@@ -42,7 +42,7 @@ row_number = nil
 column_number = nil
 win = false
 
-wrong_guesses = 20
+wrong_guesses = 30
 # Too may guesses?
 
 hit_outputs = ["Nice! Keep going :D", "Boom! You got one! :D", "BUUUUURN!", "That ship walked the plank! :D", "Kablooey! Another one sent to Davey Jones' locker! ARRRR!"]
@@ -64,7 +64,7 @@ puts "- 2 Battleships (B)"
 puts "- 3 Submarines (S)"
 puts "- 4 Cruisers (C)"
 puts "2) Use columns and grids to aim and fire! Numbers go from 1 to 8."
-puts "- So, inputting '23' will hit column 2, and row 3."
+puts "- So, inputting '23' will hit row 2, and column 3."
 puts "3) You only get 20 misses, so make sure to avoid the open water as best as you can!"
 puts
 puts Rainbow("You win once you sink all the ships!").green.bold
@@ -139,7 +139,7 @@ puts Rainbow("Ready? GOOD LUCK! :D").green.bold
 
 count = 0
 
-  boards.each do |row|
+  blank_board.each do |row|
 
     bees = row.split("").count "B"
     sees = row.split("").count "C"
@@ -148,14 +148,19 @@ count = 0
 
     count += hits
     # x = x + y
+    # puts hits.to_i
+    # puts count
+    # 02 03 04 05 08 18 17 27 22 21 20 32 33
+    # 37 47 57 56 55 65 64 60 70 76 86 80
+
     end
 
-win = (count == 25)
+    win = (count == 24)
 
 end
 
 
-if win
+if win = (count == 24)
   puts Rainbow("★______________★").green
   puts Rainbow("....YOU WIN!....").green.bold
   puts Rainbow("★______________★").green
