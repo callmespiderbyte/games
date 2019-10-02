@@ -11,6 +11,7 @@
 # if i hit open water 25 times, tell me i've lost
 
 require 'rainbow'
+require 'yaml'
 
 boards = [
   "~~BBBB~~C",
@@ -45,11 +46,10 @@ win = false
 wrong_guesses = 30
 # Too may guesses?
 
-hit_outputs = ["Nice! Keep going :D", "Boom! You got one! :D", "BUUUUURN!", "That ship walked the plank! :D", "Kablooey! Another one sent to Davey Jones' locker! ARRRR!"]
+messages = YAML.load_file('messages.yml')
+hit_outputs = messages['hit_outputs']
 
-miss_outputs = ["Splash! Missed, try again!", "Nope, that's just water! Where are the ships?!", "Oh dear, nothing but H20 here :/", "Ru oh, liquid failure my friend. Try again!", "Nu-uh, only water. Try aim for a ship next time!"]
-# How to make these change every time? Currently they're picking one and it's staying the same for the whole game...
-
+miss_outputs = messages['miss_outputs']
 
 array = []
 # What I want to do: Prevent me from inputting the same thing twice.
@@ -65,25 +65,37 @@ puts "- 3 Submarines (S)"
 puts "- 4 Cruisers (C)"
 puts "2) Use columns and grids to aim and fire! Numbers go from 1 to 8."
 puts "- So, inputting '23' will hit row 2, and column 3."
-puts "3) You only get 20 misses, so make sure to avoid the open water as best as you can!"
+puts "3) You only get 30 misses, so make sure to avoid the open water as best as you can!"
 puts
 puts Rainbow("You win once you sink all the ships!").green.bold
 puts Rainbow("Ready? GOOD LUCK! :D").green.bold
+puts
 
- while wrong_guesses > 0 || !win
-
-   puts
-   blank_board.each do |row|
-       puts row
-   end
-
+def gimmespacedammit(text)
   puts
+  puts text
+  puts
+end
+
+
+ while wrong_guesses > 0 && !win
+
+   puts "  012345678  "
+   x = 0
+   blank_board.each do |row|
+     print x.to_s + " "
+     print row + " "
+     puts x
+     x = x + 1
+   end
+   puts "  012345678  "
+
   input = $stdin.gets
 
   while array.include?(input)
-    puts
-    puts Rainbow("Ru oh, you've already guessed that spot! Try again :)").orange.bold
-    puts
+
+    gimmespacedammit Rainbow("Ru oh, you've already guessed that spot! Try again :)").orange.bold
+
     input = $stdin.gets[1]
   end
 
@@ -97,47 +109,13 @@ puts Rainbow("Ready? GOOD LUCK! :D").green.bold
   puts blank_board[column][row] = guess
 
   if guess == "~"
-      puts
-      puts Rainbow(miss_outputs.sample).blue.bold
+      gimmespacedammit Rainbow(miss_outputs.sample).blue.bold
       wrong_guesses = wrong_guesses-1
-      puts
     else
-      puts
-      puts Rainbow(hit_outputs.sample).green.bold
-      puts
+      gimmespacedammit Rainbow(hit_outputs.sample).green.bold
   end
 
-# IDEA 1
-# guess = ["B", "S", "C"]
-#   boards[column][row] == guess.any? do |hit|
-#     puts blank_board[column][row] == hit
-#       end
-
-# IDEA 2
-  # if boards[column][row] == "B"
-  #   puts blank_board[column][row] = "B"
-  # else puts "Try again!"
-  # end
-
-  # if boards[column][row] == "C"
-  #   puts blank_board[column][row] = "C"
-  # else puts "Try again!"
-  # end
-
-  # if boards[column][row] == "S"
-  #   puts blank_board[column][row] = "S"
-  # else puts "Try again!"
-  # end
-
-# IDEA 3
-    # sunk = boards[column][row] == ["B", "S", "C"].any? do |hit|
-    #   if sunk
-    #   puts blank_board[column][row] == hit
-    #     else puts "Try again!"
-    #   end
-    # end
-
-count = 0
+  count = 0
 
   blank_board.each do |row|
 
@@ -147,31 +125,29 @@ count = 0
     hits = bees + sees + esses
 
     count += hits
-    # x = x + y
-    # puts hits.to_i
-    # puts count
+
     # 02 03 04 05 08 18 17 27 22 21 20 32 33
     # 37 47 57 56 55 65 64 60 70 76 86 80
 
-    end
+  end
 
-    win = (count == 24)
+  win = (count == 25)
 
 end
 
 
-if win = (count == 24)
+if win
   puts Rainbow("★______________★").green
   puts Rainbow("....YOU WIN!....").green.bold
   puts Rainbow("★______________★").green
 
-  else
-    puts
-    puts Rainbow("☠︎_______________☠︎").red
-    puts Rainbow("....GAME OVER....").red.bold
-    puts "The solution was:"
-    boards.each do |row|
-        puts Rainbow(row).blue
-      end
-    puts Rainbow("☠︎_______________☠︎").red
+else
+  puts
+  puts Rainbow("☠︎_______________☠︎").red
+  puts Rainbow("....GAME OVER....").red.bold
+  puts "The solution was:"
+  boards.each do |row|
+    puts Rainbow(row).blue
+  end
+  puts Rainbow("☠︎_______________☠︎").red
 end

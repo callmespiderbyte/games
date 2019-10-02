@@ -1,3 +1,5 @@
+require 'pry'
+
 boards = [
   "~~BBBB~~C",
   "~~~~~~~BC",
@@ -10,21 +12,28 @@ boards = [
   "S~~~~~C~~",
 ]
 
-count = 0
 
-  boards.each do |row|
-
-    bees = row.split("").count "B"
-    sees = row.split("").count "C"
-    esses = row.split("").count "S"
-    hits = bees + sees + esses
-
-    count += hits
-    # x = x + y
-
-    puts hits.to_i
-    puts
-    end
+# def print_board_with_labels(boards)
+#   # ...
+#
+#   print "X"
+#   puts "YYY"
+#   puts "ZZZ"
+#   print "T"
+#   puts "Y"
+# end
 
 
-puts count
+
+# print_board_with_labels(boards)
+
+
+puts "  012345678  "
+x = 0
+boards.each do |row|
+  print x.to_s + " "
+  print row + " "
+  puts x
+  x = x + 1
+end
+puts "  012345678  "
