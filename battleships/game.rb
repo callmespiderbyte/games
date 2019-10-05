@@ -13,6 +13,13 @@
 require 'rainbow'
 require 'yaml'
 
+
+def gimmespacedammit(text)
+  puts
+  puts text
+  puts
+end
+
 boards = [
   "~~BBBB~~C",
   "~~~~~~~BC",
@@ -37,46 +44,32 @@ blank_board = [
   "_________",
 ]
 
-# board = boards.sample
-
 row_number = nil
 column_number = nil
 win = false
 
 wrong_guesses = 30
-# Too may guesses?
+# Too many guesses?
 
 messages = YAML.load_file('messages.yml')
 hit_outputs = messages['hit_outputs']
-
 miss_outputs = messages['miss_outputs']
 
 array = []
-# What I want to do: Prevent me from inputting the same thing twice.
-# To think about: Which is better - this, or using the !="_" method from tictactoe?
 
-puts
-puts Rainbow("🚢 BATTLESHIPS AND CRUISERS 💣").green.bold
-puts
+gimmespacedammit Rainbow("🚢 BATTLESHIPS AND CRUISERS 💣").green.bold
 puts Rainbow("How to play").green.italic
 puts "1) The aim of the game is to sink all the ships. There are:"
 puts "- 2 Battleships (B)"
 puts "- 3 Submarines (S)"
 puts "- 4 Cruisers (C)"
-puts "2) Use columns and grids to aim and fire! Numbers go from 1 to 8."
-puts "- So, inputting '23' will hit row 2, and column 3."
+puts "2) Use columns and grids to aim and fire! Numbers go from 0 to 8."
+puts "- So, inputting '20' will hit row 2, and column 0."
 puts "3) You only get 30 misses, so make sure to avoid the open water as best as you can!"
 puts
 puts Rainbow("You win once you sink all the ships!").green.bold
 puts Rainbow("Ready? GOOD LUCK! :D").green.bold
 puts
-
-def gimmespacedammit(text)
-  puts
-  puts text
-  puts
-end
-
 
  while wrong_guesses > 0 && !win
 

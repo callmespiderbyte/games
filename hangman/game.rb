@@ -1,54 +1,68 @@
 
-# start with 10 lives
+require 'rainbow'
+require 'yaml'
+
+def gimmespacedammit(text)
+  puts
+  puts text
+  puts
+end
+
+wordbank = YAML.load_file('wordbank.yml')
+
+# require 'pry'
+# binding.pry
+
+word = wordbank['words']
+selected_word = word.sample
+guessed_word = "_" * selected_word.length
+hint = wordbank['hints'][selected_word]['hint']
+
 lives = 10
-words = ["interpolation","causal","ammunition","sanddune","blimp","ramen","wellington","eczema","artery","viable","asterisk"]
-word = words.sample
-guessed_word = "_" * word.length
 
 array = []
 
-require 'rainbow'
-
-  puts
-  puts Rainbow("Welcome to HangMan! What's your name?").green.bold
-  puts
-  name = gets.chomp
-  puts
-  puts Rainbow("Hey there, #{name}! :)").green.bold
-  puts Rainbow("Ready? Set? Here's your word...!").green.bold
-  puts
+gimmespacedammit Rainbow("⚖️  HANGPERSON ⏳‍").green.bold
+puts Rainbow("How to play").green.italic
+puts "1) The aim of the game is simply to guess the word before the person meets their fate at the gallows - and yes, it's 'person'."
+puts "Execution became pretty progressive, and we don't wanna assume anyone's gender identity!"
+puts "2) If you get stuck, type in '?' for a hint. You only get one per word!"
+puts "3) Be wary of how many letters you get wrong - 10 incorrect guesses, and the stool gets kicked out from under their feet!"
+puts
+puts Rainbow("You win when you get all the letters right!").green.bold
+puts Rainbow("Ready? GOOD LUCK! :D").green.bold
+gimmespacedammit Rainbow("Here's your word:").green.bold
 
 while lives > 0 && guessed_word.include?("_")
 
-  puts guessed_word
+  gimmespacedammit guessed_word
 
   input = $stdin.gets[0]
 
-  while array.include?(input)
-    puts
-    puts Rainbow("Ru oh, you've already guessed that! Try again :)").orange.bold
-    puts
-    input = $stdin.gets[0]
-  end
+    while input == "?"
+      gimmespacedammit Rainbow(hint).blue.bold
+      input = $stdin.gets[0]
+    end
+
+    while array.include?(input)
+        gimmespacedammit Rainbow("Ru oh, you've already guessed that! Try again :)").orange.bold
+        input = $stdin.gets[0]
+    end
 
   array.push input
 
-  word.split("").each.with_index do |character, index|
+  selected_word.split("").each.with_index do |character, index|
       guessed_word[index] = character if character == input
     end
 
 
-  if word.include?(input)
-      puts
-      puts Rainbow("Correct!").green.bold
-      puts
+  if selected_word.include?(input)
+      gimmespacedammit Rainbow("Correct!").green.bold
 
   else
     lives = lives-1
     life_word = lives == 1 ? "life" : "lives"
-    puts
-    puts Rainbow("Ru oh... you've got #{lives} #{life_word} left!").red.bold
-    puts
+    gimmespacedammit Rainbow("Ru oh... you've got #{lives} #{life_word} left!").red.bold
   end
 
 end
@@ -67,7 +81,7 @@ end
     puts Rainbow("☠︎_______________☠︎").red
     puts Rainbow("....GAME OVER....").red.bold
     print "The word was "
-    puts Rainbow(word).blue
+    puts Rainbow(selected_word).blue
     puts Rainbow("☠︎_______________☠︎").red
   end
 puts
