@@ -13,10 +13,10 @@ wordbank = YAML.load_file('wordbank.yml')
 # require 'pry'
 # binding.pry
 
-word = wordbank['words']
+word = wordbank['words'].keys
 selected_word = word.sample
 guessed_word = "_" * selected_word.length
-hint = wordbank['hints'][selected_word]['hint']
+hint = wordbank['words'][selected_word]['hint']
 
 lives = 10
 
