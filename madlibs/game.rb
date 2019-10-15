@@ -6,11 +6,11 @@
 # repeat body part - sing
 # verb - infinitive
 # verb - infinitive
-# noun - sing
+# any noun - sing
 # verb - present continuous (-ing)
 # something you keep next to your bed - sing
 # something you'd never want to eat - sing
-# The last gift you got - sing
+# the last gift you got - sing
 # noun - plural
 # Willy Wonka's newest creation - plural
 
