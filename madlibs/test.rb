@@ -31,7 +31,7 @@ input = $stdin.gets.to_s.chomp
 
 if input == "yes"
 
-  puts template
+  linebreak template
 
   else
     puts
