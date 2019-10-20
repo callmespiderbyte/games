@@ -10,6 +10,8 @@
 require 'yaml'
 require 'rainbow'
 
+dictionary = File.read('dictionary.txt').split("\n")
+
 def linebreak(text)
   puts
   puts text
@@ -53,9 +55,48 @@ grid.each do |row|
   puts row.join(" ")
 end
 
+puts "Timer has started!"
+
 while Time.now < end_time
+  sleep 1
+  seconds_left = end_time.to_i - Time.now.to_i
+  if seconds_left % 10 == 0
+    puts "#{seconds_left} seconds left!"
+  end
 end
 linebreak Rainbow("Time's up!").green.bold
+
+
+#  BUT WHY IS IT BROKEN???
+# allowed_words = []
+# dictionary.each do |word|
+#   # puts word
+#   test_selection = selection
+#   puts test_selection.join(",")
+#
+#   letters = word.split('')
+#   found = true
+#
+#   letters.each do |letter|
+#     if test_selection.include?(letter)
+#       test_selection.delete(letter)
+#     else
+#       found = false
+#     end
+#   end
+#
+#   if found
+#     allowed_words << word
+#   end
+# end
+
+
+puts allowed_words.join(" ")
+puts "Found #{allowed_words.count} words"
+
+grid.each do |row|
+  puts row.join(" ")
+end
 
 # (--> trying this one first)
 #
