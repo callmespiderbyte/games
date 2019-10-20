@@ -1,0 +1,113 @@
+alldice:
+  die1:
+    - T
+    - T
+    - R
+    - E
+    - L
+    - Y
+  die2:
+    - D
+    - R
+    - Y
+    - V
+    - E
+    - C
+  die3:
+    - N
+    - E
+    - I
+    - U
+    - E
+    - S
+  die4:
+    - C
+    - P
+    - O
+    - H
+    - A
+    - S
+  die5:
+    - B
+    - B
+    - A
+    - O
+    - O
+    - J
+  die6:
+    - T
+    - M
+    - I
+    - O
+    - U
+    - C
+  die7:
+    - T
+    - S
+    - T
+    - I
+    - D
+    - Y
+  die8:
+    - R
+    - L
+    - I
+    - E
+    - D
+    - X
+  die9:
+    - F
+    - S
+    - K
+    - F
+    - P
+    - A
+  die10:
+    - T
+    - O
+    - A
+    - T
+    - O
+    - W
+  die11:
+    - T
+    - V
+    - R
+    - H
+    - E
+    - W
+  die12:
+    - U
+    - N
+    - H
+    - I
+    - Qu
+    - M
+  die13:
+    - Z
+    - H
+    - R
+    - L
+    - N
+    - N
+  die14:
+    - O
+    - I
+    - S
+    - S
+    - E
+    - T
+  die15:
+    - E
+    - E
+    - G
+    - N
+    - A
+    - A
+  die16:
+    - W
+    - E
+    - G
+    - N
+    - E
+    - H
