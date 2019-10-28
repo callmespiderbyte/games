@@ -18,11 +18,12 @@ def linebreak(text)
   puts
 end
 
-
 alldicefile = YAML.load_file('alldice.yml')
 dice = alldicefile['alldice'].keys
 
 selection = []
+
+words_found = []
 
 minutes = 1
 seconds = minutes * 60
@@ -55,13 +56,13 @@ grid.each do |row|
   puts row.join(" ")
 end
 
-puts "Timer has started!"
+linebreak "Timer has started!"
 
 while Time.now < end_time
   sleep 1
   seconds_left = end_time.to_i - Time.now.to_i
   if seconds_left % 10 == 0
-    puts "#{seconds_left} seconds left!"
+    puts Rainbow("#{seconds_left} seconds left!").red.bold
   end
 end
 linebreak Rainbow("Time's up!").green.bold
