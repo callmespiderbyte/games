@@ -8,6 +8,7 @@
 # --
 # give me the longest possible word i could have guessed
 
+require 'yaml'
 require 'rainbow'
 require 'tty-prompt'
 prompt = TTY::Prompt.new
@@ -18,18 +19,25 @@ def linebreak(text)
   puts
 end
 
-consonants = ["B","C","D","F","G","H","J","K","L","M","N","P","Q","R","S","T","V","W","X","Y","Z"]
-vowels = ["A","E","I","O","U"]
-tries = 9
+data = YAML.load_file('data.yml')
+
+consonants = data['letters']['consonants']
+vowels = data['letters']['vowels']
+input_prompt = data['output_messages']['input_prompt']
+invalid_input = data['output_messages']['invalid_input']
+timer_start = data['output_messages']['timer']['start']
+timer_end =  data['output_messages']['timer']['end']
 
 conundrum = []
+
+tries = 9
 
 begin
 
   while tries > 0
 
     countdown = nil
-    linebreak Rainbow("Would you like a consonant (type 'C'), or a vowel (type 'V')?").green.bold
+    linebreak Rainbow(input_prompt).green.bold
     input = $stdin.gets[0]
 
     valid_consonant = ["C", "c"]
@@ -37,7 +45,7 @@ begin
     valid_responses = ["C", "c", "V", "v"]
 
     while !valid_responses.include?(input)
-        linebreak Rainbow("Sorry, please only type 'C' or 'V'! :)").red.bold
+        linebreak Rainbow(invalid_input).red.bold
         input = $stdin.gets[0]
     end
 
@@ -72,7 +80,7 @@ end_time = Time.now + seconds
 linebreak "------------------------"
 puts Rainbow("Great! Your letters are:").orange.bold
 linebreak Rainbow("-> #{conundrum.join(" ")}").beige.bold
-puts Rainbow("You have 60 seconds to find the longest word you can - time is ticking by!").orange.bold
+puts Rainbow(timer_start).orange.bold
 
 
 begin
@@ -93,4 +101,4 @@ begin
   # end
 end
 
-linebreak Rainbow("Time's up!").green.bold
+linebreak Rainbow(timer_end).green.bold
