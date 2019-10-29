@@ -1,0 +1,41 @@
+9 tries left -> insert at position 0
+8 tries left -> insert at position 1
+7 tries left -> insert at position 2
+6 tries left -> insert at position 3
+5 tries left -> insert at position 4
+4 tries left -> insert at position 5
+3 tries left -> insert at position 6
+2 tries left -> insert at position 7
+1 tries left -> insert at position 8
+------------------------------------
+9   +   [ -9 ]   =   0
+8   +   [ -7 ]   =   1
+7   +   [ -5 ]   =   2
+6   +   [ -3 ]   =   3
+5   +   [ -1 ]   =   4
+4   +   [ +1 ]   =   5
+3   +   [ +3 ]   =   6
+2   +   [ +5 ]   =   7
+1   +   [ +7 ]   =   8
+------------------------------------
+[ -9 ]
+[ -7 ]
+[ -5 ]
+[ -3 ]
+[ -1 ]
+[ +1 ]
+[ +3 ]
+[ +5 ]
+[ +7 ]
+--> constant change of [ +2 ]
+------------------------------------
+therefore:
+
+tries left + [number that gets +2 added every loop + constant change] = position at which to insert
+[9 + (-11 + 2) = 0]
+--> new number = -11 + 2 = -9
+[8 + (-9 + 2) = 1]
+--> new number = -9 + 2 = -7
+[7 + (-7 + 2) = 2]
+
+:D

@@ -1,0 +1,36 @@
+output_messages:
+  input_prompt: Would you like a consonant (type 'C'), or a vowel (type 'V')?
+  invalid_input: Sorry, please only type 'C' or 'V'! :)
+  timer:
+    start: You have 60 seconds to find the longest word you can - time is ticking by!
+    end: Ru-oh! Time's up!
+
+letters:
+  consonants:
+    - B
+    - C
+    - D
+    - F
+    - G
+    - H
+    - J
+    - K
+    - L
+    - M
+    - N
+    - P
+    - Q
+    - R
+    - S
+    - T
+    - V
+    - W
+    - X
+    - Y
+    - Z
+  vowels:
+    - A
+    - E
+    - I
+    - O
+    - U

@@ -70,11 +70,6 @@ begin
       #
       #   conundrum.push selection
 
-    # input = boards[column][row]
-    # puts blank_board[column][row] = guess
-
-
-
     linebreak Rainbow("#{conundrum.join(" ")}").yellow.bold
 
     tries = tries - 1
