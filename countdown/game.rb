@@ -28,13 +28,17 @@ invalid_input = data['output_messages']['invalid_input']
 timer_start = data['output_messages']['timer']['start']
 timer_end =  data['output_messages']['timer']['end']
 
-conundrum = []
+# conundrum = []
+conundrum = ["_","_","_","_","_","_","_","_","_"]
 
 tries = 9
+magic = (-11)
 
 begin
 
   while tries > 0
+
+    sparkles = tries + (magic + 2)
 
     countdown = nil
     linebreak Rainbow(input_prompt).green.bold
@@ -51,11 +55,11 @@ begin
 
     if valid_consonant.include?(input)
       countdown = consonants.sample
-      conundrum.push countdown
+      conundrum[sparkles] = countdown
     end
     if valid_vowel.include?(input)
       countdown = vowels.sample
-      conundrum.push countdown
+      conundrum[sparkles] = countdown
     end
 
     # NOTE: Can't get this to work...
@@ -66,9 +70,15 @@ begin
       #
       #   conundrum.push selection
 
+    # input = boards[column][row]
+    # puts blank_board[column][row] = guess
+
+
+
     linebreak Rainbow("#{conundrum.join(" ")}").yellow.bold
 
     tries = tries - 1
+    magic = magic + 2
 
   end
 end
