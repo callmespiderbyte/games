@@ -12,25 +12,17 @@
 require 'rainbow'
 
 class Tamagotchi
-  attr_accessor :name, :age, :satiety, :energy, :affection, :happiness
+  attr_accessor :name, :age, :satiety, :energy, :affection, :happiness, :health
 
   def initialize(n, a, s, e, af, h)
      @name = n
      @age = a
-     @satiety = s
-     @energy = e
-     @affection = af
-     @happiness = h
-     @health = 0 + s + e + af + h
+     @satiety = s #.clamp(0, 10) <-- Not working here, so moved to loop action
+     @energy = e #.clamp(0, 10)
+     @affection = af #.clamp(0, 10)
+     @happiness = h #.clamp(0, 10)
+     @health = s + e + af + h
    end
-
-# LIMITING STATS PAST 10?
-   # def Stats.AreMaxed(tamagotchi)
-   #   return tamagotchi.satiety > MaxSatiety
-   #   return tamagotchi.energy > MaxEnergy
-   #   return tamagotchi.affection > MaxAffection
-   #   return tamagotchi.happiness > MaxHappiness
-   # end
 
    tamagotchi = Tamagotchi.new("", 0, 0, 0, 0, 0)
 
@@ -77,10 +69,13 @@ while tamagotchi.age < 2
   puts
   puts "It's #{tamagotchi.age} #{age_in_days} old, and its stats currently are:"
   puts
-  puts Rainbow("Satiety:     #{tamagotchi.satiety}/10").green.bold
-  puts Rainbow("Energy:      #{tamagotchi.energy}/10").green.bold
-  puts Rainbow("Affection:   #{tamagotchi.affection}/10").green.bold
-  puts Rainbow("Happiness:   #{tamagotchi.happiness}/10").green.bold
+  puts Rainbow("Satiety:     #{tamagotchi.satiety.clamp(0,10)}/10").green.bold
+  puts Rainbow("Energy:      #{tamagotchi.energy.clamp(0,10)}/10").green.bold
+  puts Rainbow("Affection:   #{tamagotchi.affection.clamp(0,10)}/10").green.bold
+  puts Rainbow("Happiness:   #{tamagotchi.happiness.clamp(0,10)}/10").green.bold
+  # puts
+  # puts Rainbow("Health:      #{tamagotchi.health.clamp(0,40)}/40").green.bold
+
   puts
   puts Rainbow("What would you like to do?").yellow.bold
   puts "1 = Feed #{tamagotchi.name}"
@@ -88,10 +83,23 @@ while tamagotchi.age < 2
   puts "3 = Give #{tamagotchi.name} love"
   puts "4 = Play with #{tamagotchi.name}"
   puts
-  input = $stdin.gets[0]
+  input = $stdin.gets[0].to_i
   puts
 
-  input = 1 ? tamagotchi.feed : nil
+    if input == 1
+      input
+      tamagotchi.feed
+    end
+    if input == 2
+      tamagotchi.sleep
+    end
+    if input == 3
+      tamagotchi.love
+    end
+    if input == 4
+      tamagotchi.play
+    end
+  # input = 1 ? tamagotchi.feed : nil
 
 end
 
@@ -107,10 +115,10 @@ while tamagotchi.age < 3
   puts
   puts "It's #{tamagotchi.age} #{age_in_days} old, and its stats currently are:"
   puts
-  puts Rainbow("Satiety:     #{tamagotchi.satiety}/10").green.bold
-  puts Rainbow("Energy:      #{tamagotchi.energy}/10").green.bold
-  puts Rainbow("Affection:   #{tamagotchi.affection}/10").green.bold
-  puts Rainbow("Happiness:   #{tamagotchi.happiness}/10").green.bold
+  puts Rainbow("Satiety:     #{tamagotchi.satiety.clamp(0,10)}/10").green.bold
+  puts Rainbow("Energy:      #{tamagotchi.energy.clamp(0,10)}/10").green.bold
+  puts Rainbow("Affection:   #{tamagotchi.affection.clamp(0,10)}/10").green.bold
+  puts Rainbow("Happiness:   #{tamagotchi.happiness.clamp(0,10)}/10").green.bold
   puts
   puts Rainbow("What would you like to do?").yellow.bold
   puts "1 = Feed #{tamagotchi.name}"
