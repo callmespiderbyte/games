@@ -37,51 +37,93 @@ class Tamagotchi
     def feed
       @satiety += 2
       @affection -= 1
-      puts Rainbow("Yum! That tasted good! #{tamagotchi.name} enjoyed that.").red.bold
+      @age += 0.2
+      puts Rainbow("Yum! That tasted good!").red.bold
     end
 
     def sleep
       @energy += 2
-      @satiety -= 2
+      @satiety -= 4
       @age += 0.5
-      puts Rainbow("Zzz... #{tamagotchi.name} yawns and feels rested.").red.bold
+      puts Rainbow("Zzz... It yawns and feels rested.").red.bold
     end
 
     def love
       @affection += 2
       @satiety -= 2
       @energy -= 1
-      puts Rainbow("Mmm, cuddles are nice. #{tamagotchi.name}'s heart is full of love!").red.bold
+      @age += 0.2
+      puts Rainbow("Mmm, cuddles are nice. Its heart is full of love!").red.bold
     end
 
     def play
       @happiness += 2
-      @energy -= 1
-      puts Rainbow("This is #{tamagotchi.name}'s favourite game!").red.bold
+      @energy -= 3
+      @age += 0.2
+      puts Rainbow("This is its favourite game!").red.bold
     end
 
 end
 
-tamagotchi = Tamagotchi.new("Yaruko", 1, 8, 10, 10, 9)
+tamagotchi = Tamagotchi.new("Yaruko", 0, 7, 8, 10, 9)
 
 puts Rainbow("Meet your new pet-friend, #{tamagotchi.name}!").yellow.bold
-puts "It's #{tamagotchi.age} day old, and its stats currently are:"
+
+while tamagotchi.age < 2
+
+  age_in_days = tamagotchi.age == 1 ? "day" : "days"
+  tamagotchi.affection < 10 ? nil : 10
+
+  puts
+  puts "It's #{tamagotchi.age} #{age_in_days} old, and its stats currently are:"
+  puts
+  puts Rainbow("Satiety:     #{tamagotchi.satiety}/10").green.bold
+  puts Rainbow("Energy:      #{tamagotchi.energy}/10").green.bold
+  puts Rainbow("Affection:   #{tamagotchi.affection}/10").green.bold
+  puts Rainbow("Happiness:   #{tamagotchi.happiness}/10").green.bold
+  puts
+  puts Rainbow("What would you like to do?").yellow.bold
+  puts "1 = Feed #{tamagotchi.name}"
+  puts "2 = Put #{tamagotchi.name} to sleep"
+  puts "3 = Give #{tamagotchi.name} love"
+  puts "4 = Play with #{tamagotchi.name}"
+  puts
+  input = $stdin.gets[0]
+  puts
+
+  input = 1 ? tamagotchi.feed : nil
+
+end
+
 puts
-puts Rainbow("Satiety:     #{tamagotchi.satiety}/10").green.bold
-puts Rainbow("Energy:      #{tamagotchi.energy}/10").green.bold
-puts Rainbow("Affection:   #{tamagotchi.affection}/10").green.bold
-puts Rainbow("Happiness:   #{tamagotchi.happiness}/10").green.bold
-puts
-puts Rainbow("What would you like to do?").yellow.bold
-puts "1 = Feed #{tamagotchi.name}"
-puts "2 = Put #{tamagotchi.name} to sleep"
-puts "3 = Give #{tamagotchi.name} love"
-puts "4 = Play with #{tamagotchi.name}"
-puts
-input = $stdin.gets[0]
+puts Rainbow("WOAH, #{tamagotchi.name} grew up! Now it's a todler! :D").orange.bold
 puts
 
-input = 3 ? tamagotchi.love : nil
+while tamagotchi.age < 3
+
+  age_in_days = tamagotchi.age == 1 ? "day" : "days"
+  tamagotchi.affection < 10 ? nil : 10
+
+  puts
+  puts "It's #{tamagotchi.age} #{age_in_days} old, and its stats currently are:"
+  puts
+  puts Rainbow("Satiety:     #{tamagotchi.satiety}/10").green.bold
+  puts Rainbow("Energy:      #{tamagotchi.energy}/10").green.bold
+  puts Rainbow("Affection:   #{tamagotchi.affection}/10").green.bold
+  puts Rainbow("Happiness:   #{tamagotchi.happiness}/10").green.bold
+  puts
+  puts Rainbow("What would you like to do?").yellow.bold
+  puts "1 = Feed #{tamagotchi.name}"
+  puts "2 = Put #{tamagotchi.name} to sleep"
+  puts "3 = Give #{tamagotchi.name} love"
+  puts "4 = Play with #{tamagotchi.name}"
+  puts
+  input = $stdin.gets[0]
+  puts
+
+  input = 1 ? tamagotchi.feed : nil
+
+end
 
 
 # if input = 2
