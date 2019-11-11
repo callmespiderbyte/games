@@ -29,6 +29,8 @@ class Tamagotchi
     def feed
       @satiety += 2
       @affection -= 1
+      @energy -= 1
+      @happiness += 1
       @age += 0.2
       puts Rainbow("Yum! That tasted good!").red.bold
     end
@@ -51,33 +53,51 @@ class Tamagotchi
     def play
       @happiness += 2
       @energy -= 3
+      @satiety -= 2
       @age += 0.2
       puts Rainbow("This is its favourite game!").red.bold
     end
 
 end
 
+def red_text(text)
+  puts Rainbow(text).red.bold
+end
+
+def green_text(text)
+  puts Rainbow(text).green.bold
+end
+
+def yellow_text(text)
+  puts Rainbow(text).yellow.bold
+end
+
+def orange_text(text)
+  puts Rainbow(text).orange.bold
+end
+
 tamagotchi = Tamagotchi.new("Yaruko", 0, 7, 8, 10, 9)
 
-puts Rainbow("Meet your new pet-friend, #{tamagotchi.name}!").yellow.bold
+puts
+orange_text "Meet your new pet-friend, #{tamagotchi.name}!"
+puts
 
 while tamagotchi.age < 2
 
   age_in_days = tamagotchi.age == 1 ? "day" : "days"
-  tamagotchi.affection < 10 ? nil : 10
 
   puts
   puts "It's #{tamagotchi.age} #{age_in_days} old, and its stats currently are:"
   puts
-  puts Rainbow("Satiety:     #{tamagotchi.satiety.clamp(0,10)}/10").green.bold
-  puts Rainbow("Energy:      #{tamagotchi.energy.clamp(0,10)}/10").green.bold
-  puts Rainbow("Affection:   #{tamagotchi.affection.clamp(0,10)}/10").green.bold
-  puts Rainbow("Happiness:   #{tamagotchi.happiness.clamp(0,10)}/10").green.bold
+  green_text "Satiety:     #{tamagotchi.satiety.clamp(0,10)}/10"
+  green_text "Energy:      #{tamagotchi.energy.clamp(0,10)}/10"
+  green_text "Affection:   #{tamagotchi.affection.clamp(0,10)}/10"
+  green_text "Happiness:   #{tamagotchi.happiness.clamp(0,10)}/10"
   # puts
   # puts Rainbow("Health:      #{tamagotchi.health.clamp(0,40)}/40").green.bold
 
   puts
-  puts Rainbow("What would you like to do?").yellow.bold
+  yellow_text "What would you like to do?"
   puts "1 = Feed #{tamagotchi.name}"
   puts "2 = Put #{tamagotchi.name} to sleep"
   puts "3 = Give #{tamagotchi.name} love"
@@ -86,50 +106,33 @@ while tamagotchi.age < 2
   input = $stdin.gets[0].to_i
   puts
 
-    if input == 1
-      input
+  while input < 1 || input > 4
+    rainbow_red "Oh dear... seems like you're trying to make #{tamagotchi.name} do things it doesn't know how to do!"
+    rainbow_red "Please stick to commands it knows?"
+    puts
+    input = $stdin.gets[0].to_i
+  end
+
+  case input
+    when 1
       tamagotchi.feed
-    end
-    if input == 2
+    when 2
       tamagotchi.sleep
-    end
-    if input == 3
+    when 3
       tamagotchi.love
-    end
-    if input == 4
+    when 4
       tamagotchi.play
-    end
-  # input = 1 ? tamagotchi.feed : nil
+  end
 
 end
 
 puts
-puts Rainbow("WOAH, #{tamagotchi.name} grew up! Now it's a todler! :D").orange.bold
+orange_text "WOAH, #{tamagotchi.name} grew up! Now it's a toddler! :D"
 puts
 
 while tamagotchi.age < 3
 
   age_in_days = tamagotchi.age == 1 ? "day" : "days"
-  tamagotchi.affection < 10 ? nil : 10
-
-  puts
-  puts "It's #{tamagotchi.age} #{age_in_days} old, and its stats currently are:"
-  puts
-  puts Rainbow("Satiety:     #{tamagotchi.satiety.clamp(0,10)}/10").green.bold
-  puts Rainbow("Energy:      #{tamagotchi.energy.clamp(0,10)}/10").green.bold
-  puts Rainbow("Affection:   #{tamagotchi.affection.clamp(0,10)}/10").green.bold
-  puts Rainbow("Happiness:   #{tamagotchi.happiness.clamp(0,10)}/10").green.bold
-  puts
-  puts Rainbow("What would you like to do?").yellow.bold
-  puts "1 = Feed #{tamagotchi.name}"
-  puts "2 = Put #{tamagotchi.name} to sleep"
-  puts "3 = Give #{tamagotchi.name} love"
-  puts "4 = Play with #{tamagotchi.name}"
-  puts
-  input = $stdin.gets[0]
-  puts
-
-  input = 1 ? tamagotchi.feed : nil
 
 end
 
