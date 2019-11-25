@@ -57,7 +57,7 @@ class TamagotchiGame
       when 4
         response = @tamagotchi.do("play")
         puts response
-      when 5 
+      when 5
         response = @tamagotchi.do("russian_class")
         puts response
       when 6
@@ -74,7 +74,7 @@ class TamagotchiGame
     color_text :orange, "Meet your new pet-friend, #{@tamagotchi.name}!"
     puts
 
-    while @tamagotchi.age < 2
+    while @tamagotchi.age <= 2
       print_age
       print_stats
       print_actions
@@ -86,7 +86,7 @@ class TamagotchiGame
     color_text :orange, "It wants to learn about the Soviet Union!"
     puts
 
-    while @tamagotchi.age < 3
+    while @tamagotchi.age <= 3
       print_age
       print_stats
       print_actions
@@ -98,7 +98,7 @@ class TamagotchiGame
     color_text :orange, "It wants to start talking about its feelings!"
     puts
 
-    while @tamagotchi.age < 4
+    while @tamagotchi.age <= 4
       print_age
       print_stats
       print_actions

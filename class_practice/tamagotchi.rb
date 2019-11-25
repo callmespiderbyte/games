@@ -33,8 +33,8 @@ class Tamagotchi
       @age > 3
     else
       false
-    end 
-  end 
+    end
+  end
 
 private
 
@@ -104,7 +104,6 @@ private
     @satiety -= -1
     @age += 0.2
     @feels += 2
-    "k enough thnx"
+    "K that's enough thx..."
   end
 end
-
