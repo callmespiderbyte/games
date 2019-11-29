@@ -12,7 +12,7 @@ def color_print(color, text)
 end
 
 days_left = 24
-
+# array = []        * See note below for why I took this out!
 boards = [
   "01 05 23 16 11 02",
   "13 09 07 20 10 12",
@@ -63,8 +63,12 @@ while days_left > 0
 
   input = $stdin.gets.to_i
 
-  # row = input[0]
-  # column = input[1]
+      # TOOK THIS OUT: Wanted to prevent picking the same day twice, but actually realised
+      # you might want to reread a previous day so decided to not create that restriction :)
+          # while array.include?(input)
+          #   color_puts :red, "Ru-oh, think you've seen that day already... Try find today's surprise!"
+          #   input = $stdin.gets.to_i
+          # end
 
   puts
   color_puts :orange, advents['advents'][input]
